@@ -1,4 +1,8 @@
+const validator = require('validator')
 const getNotes = require('./notes.js')
 
-const notes = getNotes()
-console.log(notes)
+const msg = getNotes()
+
+console.log(msg)
+
+console.log(validator.isURL('https://mead.io'))
