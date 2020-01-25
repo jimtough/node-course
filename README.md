@@ -7,6 +7,18 @@ The course instructor recommended using Visual Studio Code as the IDE. I did so 
 ## Initialization notes
 You will need to run the command 'npm install' after cloning this Git repo. The npm utililty will download and install all the third-party modules these tutorial projects depend on.
 
+## Example of adding an npm package to my node project
+
+Let's say I wanted to add the third-party 'yargs' package to my project, locked to version 12.0.2.
+I would execute the following command in Windows PowerShell:
+
+`npm i yargs@12.0.2`
+
+This will download yargs 12.0.2, along with its dependencies, to my local machine.
+It will also update the 'package.json' file in my project with the new dependency on 'yargs'.
+
+reference: https://www.npmjs.com/package/yargs
+
 ## Issues when running locally on Windows 10
 
 When I reached the section on using the 'nodemon' module, I got the following error message in PowerShell:
