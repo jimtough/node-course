@@ -21,6 +21,8 @@ reference: https://www.npmjs.com/package/yargs
 
 ## Issues when running locally on Windows 10
 
+### nodemon
+
 When I reached the section on using the 'nodemon' module, I got the following error message in PowerShell:
 
 nodemon.ps1 cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
@@ -32,3 +34,19 @@ I went to URL from the error message found there are several options for configu
 I opted to allow script execution for my user account only. This can easily be changed later when I'm finished running node.js locally.
 
 `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+### debugger
+
+This issue happened when 'debugger' was added inside a function in the 'notes' app, and the following command was used to run node:
+
+`node inspect app.js add --title="abc" --body="123"`
+
+The Windows PowerShell displayed this error message in the terminal, and then the app crashed:
+
+`Timeout (2000) waiting for 127.0.0.1:9229 to be free`
+
+The instructor recommended using the following alternative command line as a workaround to this Windows-related bug:
+
+`node --inspect-brk app.js add --title="abc" --body="123"`
+
+Now I am able to open a Chrome browser and go to URL 'chrome://inspect/' to debug my node application.

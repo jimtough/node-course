@@ -6,6 +6,9 @@ const addNote = (title, body) => {
     const notes = loadNotes()
     // Look for first note object that exists with same title (if any exists)
     const duplicateNote = notes.find((note) => note.title === title)
+
+    debugger
+
     // NOTE: Either of the 'if' statements below would work here
     //if (duplicateNote === undefined) {
     if (!duplicateNote) {
