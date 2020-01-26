@@ -47,16 +47,23 @@ yargs.command({
     command: 'list',
     describe: 'List all notes',
     handler() {
-        console.log('Listing all notes! (STUB FUNCTION)')
+        notes.listNotes()
     }
 })
 
 // Create read command
 yargs.command({
     command: 'read',
-    describe: 'Read an existing note',
-    handler() {
-        console.log('Reading an existing note! (STUB FUNCTION)')
+    describe: 'Read existing note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title)
     }
 })
 

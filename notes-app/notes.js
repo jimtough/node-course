@@ -1,16 +1,14 @@
 const chalk = require('chalk')
 const fs = require('fs')
 
-const getNotes = () => {
-    return 'Your notes...'
-}
-
 const addNote = (title, body) => {
     // Expects to get back an array of note objects (array could be empty)
     const notes = loadNotes()
-    // Look for note objects that already exist with same title
-    const duplicateNotes = notes.filter((note) => note.title === title)
-    if (duplicateNotes.length === 0) {
+    // Look for first note object that exists with same title (if any exists)
+    const duplicateNote = notes.find((note) => note.title === title)
+    // NOTE: Either of the 'if' statements below would work here
+    //if (duplicateNote === undefined) {
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
@@ -35,6 +33,26 @@ const removeNote = (title) => {
     }
 }
 
+const listNotes = () => {
+    // Expects to get back an array of note objects (array could be empty)
+    const notes = loadNotes()
+    console.log(chalk.inverse('Your notes'))
+    notes.forEach((note) => console.log(note.title))
+}
+
+const readNote = (title) => {
+    // Expects to get back an array of note objects (array could be empty)
+    const notes = loadNotes()
+    // Look for first note object that exists with same title (if any exists)
+    const note = notes.find((note) => note.title === title)
+    if (note) {
+        console.log(chalk.inverse(note.title))
+        console.log(note.body)
+    } else {
+        console.log(chalk.red.inverse('No note found! | title: [' + title + ']'))
+    }
+}
+
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJSON)
@@ -53,7 +71,8 @@ const loadNotes = () => {
 
 // Exports an object whose properties are the functions in this file
 module.exports = {
-    getNotes: getNotes,
+    listNotes: listNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    readNote: readNote
 }
