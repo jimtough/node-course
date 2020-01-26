@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 const fs = require('fs')
 
 const getNotes = function() {
@@ -17,9 +18,24 @@ const addNote = function(title, body) {
             body: body
         })
         saveNotes(notes)
-        console.log('New note added - title: [' + title + ']')
+        console.log(chalk.green.inverse('New note added - title: [' + title + ']'))
     } else {
-        console.log('Note already exists - did not add | title: [' + title + ']')
+        console.log(chalk.red.inverse('Note already exists with title [' + title + ']'))
+    }
+}
+
+const removeNote = function(title) {
+    // Expects to get back an array of note objects (array could be empty)
+    const notes = loadNotes()
+    // Make a copy of the entire array of notes, minus the one we are removing
+    const notesToKeep = notes.filter(function (note) {
+        return note.title !== title
+    })
+    if (notes.length > notesToKeep.length) {
+        saveNotes(notesToKeep)
+        console.log(chalk.green.inverse('Note removed! | title: [' + title + ']'))
+    } else {
+        console.log(chalk.red.inverse('No note found! | title: [' + title + ']'))
     }
 }
 
@@ -42,5 +58,6 @@ const loadNotes = function() {
 // Exports an object whose properties are the functions in this file
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
