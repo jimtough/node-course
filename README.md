@@ -21,8 +21,8 @@ reference: https://www.npmjs.com/package/yargs
 
 ## Various references related to course material
 
-Site for 'weather app' source data: https://darksky.net/dev
-
+* Site for 'weather app' source data: https://darksky.net/dev
+* Chrome extension: "JSON Formatter" (https://github.com/callumlocke/json-formatter | http://goo.gl/ZDLWY0)
 
 ## Issues when running locally on Windows 10
 
