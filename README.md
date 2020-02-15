@@ -19,6 +19,11 @@ It will also update the 'package.json' file in my project with the new dependenc
 
 reference: https://www.npmjs.com/package/yargs
 
+## Various references related to course material
+
+Site for 'weather app' source data: https://darksky.net/dev
+
+
 ## Issues when running locally on Windows 10
 
 ### nodemon
@@ -50,3 +55,4 @@ The instructor recommended using the following alternative command line as a wor
 `node --inspect-brk app.js add --title="abc" --body="123"`
 
 Now I am able to open a Chrome browser and go to URL 'chrome://inspect/' to debug my node application.
+
