@@ -1,4 +1,5 @@
 const request = require('request')
+const geocode = require('./utils/geocode')
 
 // Add some request parameters - set units to 'ca' to get Canadian style units
 // REFERENCE: https://darksky.net/dev/docs#forecast-request
@@ -23,65 +24,7 @@ request({ url: darkskyUrl, json: true }, (error, response)=>{
 })
 */
 
-// // REFERENCE: https://docs.mapbox.com/api/search/
-// const myMapboxAccessToken = 'pk.eyJ1IjoiYWR1bHRtYWxlaHVtYW4iLCJhIjoiY2s2cDNqYXFlMWk3YjNocXR3Y2NmMmhrYiJ9.jGwnHAeVK98giUOPZHFbfg'
-// const mapboxUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + 
-//         // add the URL-encoded search terms provided by the user
-//         'Los%20Angeles' + 
-//         // add other API parameters, most importantly my Mapbox API access token
-//         '.json?limit=1&language=en-CA&access_token=' + myMapboxAccessToken
-
-// //console.log('Will use URL for Mapbox: [' + mapboxUrl + ']')
-// request({ url: mapboxUrl, json: true }, (error, response)=>{
-//     if (error) {
-//         console.log('Unable to connect to geolocation service')
-//     } else if (response.body.message) {
-//         console.log('Error message returned by geolocation service: [' + response.body.message + ']')
-//     } else if (!response.body.features || response.body.features.length === 0) {
-//         console.log('No matches returned by geolocation service')
-//     } else {
-//         const matchingPlaceName = response.body.features[0].place_name
-//         const latitude = response.body.features[0].center[1]
-//         const longitude = response.body.features[0].center[0]
-//         console.log("The lat/lon of '" + matchingPlaceName + "' is " + latitude + ', ' + longitude + '.')
-//     }
-// })
-
-// Refactored the code above into a reusable function.
-// Accepts a plain-text address to be submitted to Mapbox for lat/lon lookup, and a callback function.
-// The callback function must accept two parameters: error and data.
-const geocode = (address, callback) => {
-    // REFERENCE: https://docs.mapbox.com/api/search/
-    const myMapboxAccessToken = 'pk.eyJ1IjoiYWR1bHRtYWxlaHVtYW4iLCJhIjoiY2s2cDNqYXFlMWk3YjNocXR3Y2NmMmhrYiJ9.jGwnHAeVK98giUOPZHFbfg'
-    const mapboxUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + 
-            // add the URL-encoded search terms provided by the user
-            //'Los%20Angeles' + 
-            encodeURIComponent(address) +
-            // add other API parameters, most importantly my Mapbox API access token
-            '.json?limit=1&language=en-CA&access_token=' + myMapboxAccessToken
-    request({ url: mapboxUrl, json: true }, (error, response)=>{
-        if (error) {
-            callback('Unable to connect to geolocation service', undefined)
-        } else if (response.body.message) {
-            callback('Error message returned by geolocation service: [' + response.body.message + ']', undefined)
-        } else if (!response.body.features || response.body.features.length === 0) {
-            callback('No matches returned by geolocation service', undefined)
-        } else {
-            callback(undefined, {
-                latitude: response.body.features[0].center[1],
-                longitude: response.body.features[0].center[0],
-                location: response.body.features[0].place_name
-            })
-        }
-    })
-
-}
-
-// geocode('Philadelphia', (error, data) => {
-//     console.log(error)
-//     console.log(data)
-// })
-geocode('Halifax, Nova Scotia', (error, data) => {
+geocode('Bedford, Nova Scotia', (error, data) => {
     console.log(error)
     console.log(data)
 })
