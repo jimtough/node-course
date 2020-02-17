@@ -8,16 +8,17 @@ if (!placeName) {
     return console.log('You must supply the place name for the forecast as a commmand line parameter!')
 }
 
-geocode(placeName, (error, geocodeData) => {
+// Use object destructuring to pull out latitude/longitude/location from data object
+geocode(placeName, (error, {latitude, longitude, location}) => {
     if (error) {
         return console.log(error)
     }
-    console.log('Now getting forecast for ' + geocodeData.location + '...')
-    forecast(geocodeData.latitude, geocodeData.longitude, (error, forecastData)=>{
+    console.log('Now getting forecast for ' + location + '...')
+    forecast(latitude, longitude, (error, forecastData)=>{
         if (error) {
             return console.log(error)
         }
-        console.log('Forecast retrieved for ' + geocodeData.location)
+        console.log('Forecast retrieved for ' + location)
         console.log(forecastData)
     })
 })

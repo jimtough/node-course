@@ -9,16 +9,16 @@ const forecast = (latitude, longitude, callback) => {
     const darkskyUrl = baseDarkskyUrl + latitude + ',' + longitude + '?units=ca'
     // Use 'request' module to request weather data from the DarkSky API.
     // By passing the 'json: true' parameter in its options object, we should get back a JSON-formatted response.
-    request({ url: darkskyUrl, json: true }, (error, response)=>{
+    request({ url: darkskyUrl, json: true }, (error, {body})=>{
         if (error) {
             callback('Unable to connect to weather service', undefined)
-        } else if (response.body.error) {
+        } else if (body.error) {
             // We know from purposely supplying a garbage request to Darksky that their response will contain an 'error' element in the body
-            callback('Weather service responded with an error | code: [' + response.body.code + '] | error: [' + response.body.error + ']', undefined)
+            callback('Weather service responded with an error | code: [' + body.code + '] | error: [' + body.error + ']', undefined)
         } else {
-            callback(undefined, 'It is currently ' + response.body.currently.temperature + 
-            ' C. There is a ' + (parseFloat(response.body.currently.precipProbability) * 100).toFixed(0) + 
-            '% chance of rain. Daily summary: [' + response.body.daily.data[0].summary + ']')
+            callback(undefined, 'It is currently ' + body.currently.temperature + 
+            ' C. There is a ' + (parseFloat(body.currently.precipProbability) * 100).toFixed(0) + 
+            '% chance of rain. Daily summary: [' + body.daily.data[0].summary + ']')
         }
     })
 }
