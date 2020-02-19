@@ -2,10 +2,13 @@
 The Complete Node.js Developer Course (3rd Edition) - my workspace
 
 ## Development notes
-The course instructor recommended using Visual Studio Code as the IDE. I did so when I took the course.
+* The course instructor recommended using Visual Studio Code as the IDE. I did so when I took the course.
+* The project files "package.json" and "package-lock.json" are initially generated for you, but these SHOULD be committed to Git along with source code.
 
 ## Initialization notes
-You will need to run the command 'npm install' after cloning this Git repo. The npm utililty will download and install all the third-party modules these tutorial projects depend on.
+* You will need to run the command 'npm install' after cloning this Git repo. The npm utililty will download and install all the third-party modules these tutorial projects depend on.
+* When creating a new node project, first create the root project directory, then do "npm init -y" to initialize the skeleton project structure.
+  * Add specific npm packages as project dependencies using a command like this example: `npm i express@4.16.4`
 
 ## Example of adding an npm package to my node project
 
@@ -23,6 +26,7 @@ reference: https://www.npmjs.com/package/yargs
 
 * Site for 'weather app' source data: https://darksky.net/dev
 * Chrome extension: "JSON Formatter" (https://github.com/callumlocke/json-formatter | http://goo.gl/ZDLWY0)
+* "Express" is an important node package for serving up web pages (http://expressjs.com)
 
 ## Issues when running locally on Windows 10
 
