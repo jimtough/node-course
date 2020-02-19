@@ -14,16 +14,21 @@ const app = express()
 // By convention (for using 'request' module), req = Request, res = Response
 app.get('', (req, res) => {
     // this is the handler for the top-level route on my web site
-    res.send('Hello express!')
+    res.send('<h1>Hello express!</h1>')
 })
 app.get('/about', (req, res) => {
-    res.send('This is the "about" page')
+    res.send('<h1>This is the "about" page</h1>')
 })
 app.get('/help', (req, res) => {
-    res.send('Help page')
+    res.send('<h1>This is the "help" page</h1>')
 })
 app.get('/weather', (req, res) => {
-    res.send('This is the "weather" page')
+    // Example of how to send a JSON object as the response.
+    // The express module will automatically stringify the Javascript object into JSON.
+    res.send({
+        forecast: 'The weather today will be total crap. Cold, rainy, cloudy. 0% chance of meatballs.',
+        location: 'Nova Scotia, Canada'
+    })
 })
 //-----------------------------------------------------------------------------
 
