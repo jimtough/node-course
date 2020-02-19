@@ -1,27 +1,25 @@
+const path = require('path')
 const express = require('express')
+
+// Special built-in node variables:
+//  - directory where this script lives
+//  - fully-qualified path and filename of this script
+console.log(__dirname)
+console.log(__filename)
+
+// Prefer using the core 'path' module
+console.log(path.join(__dirname, '../public'))
 
 // 'express' is just a function.
 // It takes no parameters, and returns an object that we will interact with.
 const app = express()
+const publicDirectoryPath = path.join(__dirname, '../public')
 
-//-----------------------------------------------------------------------------
-// EXAMPLE SITE STRUCTURE
-//  app.com
-//  app.com/about
-//  app.com/help
-//  app.com/weather
+// Configure express to serve all static content from the 'public' directory of this project
+// NOTE: The 'index.html' in public will take precedence over a '' route handler.
+app.use(express.static(publicDirectoryPath))
 
 // By convention (for using 'request' module), req = Request, res = Response
-app.get('', (req, res) => {
-    // this is the handler for the top-level route on my web site
-    res.send('<h1>Hello express!</h1>')
-})
-app.get('/about', (req, res) => {
-    res.send('<h1>This is the "about" page</h1>')
-})
-app.get('/help', (req, res) => {
-    res.send('<h1>This is the "help" page</h1>')
-})
 app.get('/weather', (req, res) => {
     // Example of how to send a JSON object as the response.
     // The express module will automatically stringify the Javascript object into JSON.
@@ -30,7 +28,6 @@ app.get('/weather', (req, res) => {
         location: 'Nova Scotia, Canada'
     })
 })
-//-----------------------------------------------------------------------------
 
 // Listen on port 3000 locally while developing.
 // I just need to go here: http://localhost:3000/
